@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail, Sparkles, CheckCircle2 } from "lucide-react";
+import { Mail, CheckCircle2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -96,8 +97,15 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-success rounded-full mb-4">
-              <Sparkles className="w-8 h-8 text-white" />
+            <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-2xl">
+              <Image
+                src="/golfyapplogo.png"
+                alt="Golfy Logo"
+                width={96}
+                height={96}
+                className="object-cover scale-125"
+                style={{ objectPosition: 'center center' }}
+              />
             </div>
             <h1 className="text-4xl font-semibold text-foreground mb-3">
               Your Golf Journey
@@ -125,7 +133,7 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
             >
               <CheckCircle2 className="w-5 h-5 text-lime flex-shrink-0" />
-              <p className="text-sm text-lime-foreground font-medium">
+              <p className="text-sm text-foreground font-medium">
                 You're on the list! We'll notify you when we launch.
               </p>
             </motion.div>
