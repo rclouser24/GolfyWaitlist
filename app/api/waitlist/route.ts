@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       .from("waitlist")
       .select("email")
       .eq("email", normalizedEmail)
-      .single();
+      .maybeSingle();
 
     if (existingEntry) {
       return NextResponse.json(
