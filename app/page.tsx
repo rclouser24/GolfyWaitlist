@@ -121,7 +121,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            Join the waitlist for <span className="font-semibold text-foreground">Golfy</span> - Track courses, earn badges, and level up your golf game. Be first to tee off when we launch.
+            Join the waitlist for <span className="font-semibold text-foreground">Golfy</span>. Track the courses you play and earn XP and badges for collecting rare courses. Be the first to tee off when we launch.
           </motion.p>
 
           {/* Success State */}
