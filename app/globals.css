@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #f5f3ef;
+  --color-foreground: #1a1f1b;
+  --color-primary: #2d5f4d;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #ffffff;
+  --color-muted: #e8f0ec;
+  --color-muted-foreground: #6b7c72;
+  --color-accent: #d4f4e7;
+  --color-lime: #00ff88;
+  --color-lime-foreground: #0a2618;
+  --color-success: #10b981;
+  --color-border: #b4b4b4;
+  --color-card: rgba(255, 255, 255, 0.7);
+
+  /* Border Radius */
+  --radius-sm: 0.75rem;
+  --radius: 1rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* Spacing */
+  --spacing-*: initial;
+  --spacing-0: 0px;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+
+  /* Font Sizes */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
