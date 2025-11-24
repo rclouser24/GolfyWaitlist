@@ -80,23 +80,23 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-8 flex items-center justify-between">
+        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-[60px] h-[60px] md:w-[81px] md:h-[81px] rounded-2xl overflow-hidden">
+            <div className="relative w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-xl overflow-hidden">
               <Image
-                src="/golfyapplogo.png"
+                src="/logo.png"
                 alt="Golfy Logo"
                 fill
                 className="object-cover"
               />
             </div>
-            <h1 className="font-semibold text-[20px] md:text-[24px] text-[#282828] tracking-[-0.3125px]">
+            <h1 className="font-semibold text-[16px] md:text-[20px] text-[#282828] tracking-[-0.3125px]">
               Golfy
             </h1>
           </div>
           <button
             onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-[#798d40] text-white font-semibold text-[16px] md:text-[18px] px-8 md:px-[47px] py-3 md:py-[18px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
+            className="bg-[#798d40] text-white font-semibold text-[14px] md:text-[16px] px-6 md:px-[32px] py-2 md:py-[12px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
           >
             Join Waitlist
           </button>
@@ -176,21 +176,14 @@ export default function Home() {
                   As you collect different courses you will start to earn badges as achievements for collecting related courses or completing challenges. Earning badges helps boost your XP making you level up faster.
                 </p>
               </div>
-              <div className="flex gap-6 items-start justify-center">
-                <div className="relative w-[204px] h-[410px] rounded-[28px] overflow-hidden shadow-lg">
+              <div className="flex items-center justify-center">
+                <div className="relative w-full max-w-[440px] rounded-[12px] overflow-hidden">
                   <Image
-                    src="/BadgeCard.png"
-                    alt="Badge Card 1"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="relative w-[204px] h-[410px] rounded-[28px] overflow-hidden shadow-lg">
-                  <Image
-                    src="/BadgeCard2.png"
-                    alt="Badge Card 2"
-                    fill
-                    className="object-cover"
+                    src="/Badge Cards.png"
+                    alt="Badge Cards"
+                    width={908}
+                    height={902}
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
@@ -215,32 +208,15 @@ export default function Home() {
                   Explore curated collections from coastal gems to championship courses, earn XP for each course you play. The more rare the course the more XP you earn.
                 </p>
               </div>
-              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
-                <div className="relative w-full max-w-[326px] h-[500px] rounded-2xl overflow-hidden shadow-lg">
+              <div className="flex items-center justify-center">
+                <div className="relative w-[90%]">
                   <Image
-                    src="/lists.png"
-                    alt="Curated Course Lists"
-                    fill
-                    className="object-cover"
+                    src="/curatedcourses3.png"
+                    alt="Curated Courses"
+                    width={1634}
+                    height={1000}
+                    className="w-full h-auto"
                   />
-                </div>
-                <div className="flex flex-col gap-6">
-                  <div className="relative w-full max-w-[439px] h-[186px] rounded-2xl overflow-hidden shadow-lg">
-                    <Image
-                      src="/rarity.png"
-                      alt="Course Rarity"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative w-full max-w-[303px] h-[281px] rounded-2xl overflow-hidden shadow-lg">
-                    <Image
-                      src="/courses.png"
-                      alt="Courses"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
@@ -256,7 +232,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex items-center justify-center flex-1">
-                <div className="relative w-full max-w-[307px] h-[402px] rounded-xl overflow-hidden shadow-lg">
+                <div className="relative w-full max-w-[307px] h-[402px] rounded-[8px] overflow-hidden">
                   <Image
                     src="/leaderboard.png"
                     alt="Leaderboard"
