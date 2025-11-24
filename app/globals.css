@@ -1,29 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-background: #f5f3ef;
-  --color-foreground: #1a1f1b;
-  --color-primary: #2d5f4d;
+  /* Colors - Warmer & Softer Palette */
+  --color-background: #faf8f5;
+  --color-foreground: #2a2f2b;
+  --color-primary: #8BB89F;
   --color-primary-foreground: #ffffff;
   --color-secondary: #ffffff;
-  --color-muted: #e8f0ec;
-  --color-muted-foreground: #6b7c72;
+  --color-muted: #f0ede8;
+  --color-muted-foreground: #7a8882;
   --color-accent: #d4f4e7;
   --color-lime: #53AA48;
   --color-lime-foreground: #ffffff;
+  --color-coral: #FFB088;
+  --color-coral-foreground: #ffffff;
+  --color-peach: #FFC4A3;
+  --color-sage: #B8D4C6;
   --color-success: #10b981;
-  --color-border: #b4b4b4;
-  --color-card: rgba(255, 255, 255, 0.7);
+  --color-border: #d4cfc7;
+  --color-card: rgba(255, 255, 255, 0.8);
 
-  /* Border Radius */
-  --radius-sm: 0.75rem;
-  --radius: 1rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
+  /* Border Radius - More Rounded */
+  --radius-sm: 1rem;
+  --radius: 1.25rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+  --radius-3xl: 3rem;
 
   /* Spacing */
   --spacing-*: initial;

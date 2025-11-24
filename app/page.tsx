@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail, CheckCircle2, Sparkles } from "lucide-react";
+import { Mail } from "lucide-react";
 import { toast } from "sonner";
 import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
 
   // Fetch waitlist count on mount
@@ -55,7 +54,6 @@ export default function Home() {
       const data = await response.json();
 
       if (response.ok) {
-        setIsSubmitted(true);
         toast.success("You're on the list! Check your email for updates.");
         setEmail("");
         // Update the waitlist count
@@ -74,144 +72,254 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/golfybackground.png)' }}
-      />
-
-      {/* Main Content */}
-      <motion.div
-        className="w-full max-w-md relative z-10"
-        initial={{ opacity: 0, y: 20 }}
+    <div className="bg-[#f5f3ef] min-h-screen flex flex-col items-center">
+      {/* Header */}
+      <motion.header
+        className="bg-white border-b-2 border-neutral-300 w-full"
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 200, damping: 15 }}
+        transition={{ duration: 0.5 }}
       >
-        {/* Card */}
-        <div className="bg-card backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-border">
-          {/* Logo/Header */}
-          <motion.div
-            className="text-center mb-8"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-2xl">
+        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-8 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative w-[60px] h-[60px] md:w-[81px] md:h-[81px] rounded-2xl overflow-hidden">
               <Image
                 src="/golfyapplogo.png"
                 alt="Golfy Logo"
-                width={96}
-                height={96}
-                className="object-cover scale-125"
-                style={{ objectPosition: 'center center' }}
+                fill
+                className="object-cover"
               />
             </div>
-            <h1 className="text-4xl font-semibold text-foreground mb-3">
-              Your Golf Journey
-              <br />
-              <span className="text-primary">Starts Here</span>
+            <h1 className="font-semibold text-[20px] md:text-[24px] text-[#282828] tracking-[-0.3125px]">
+              Golfy
             </h1>
+          </div>
+          <button
+            onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#798d40] text-white font-semibold text-[16px] md:text-[18px] px-8 md:px-[47px] py-3 md:py-[18px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
+          >
+            Join Waitlist
+          </button>
+        </div>
+      </motion.header>
+
+      {/* Main Content */}
+      <div className="w-full max-w-[1280px] px-4 md:px-8 mt-16 md:mt-24 mb-24 space-y-14 md:space-y-24">
+        {/* Hero Section */}
+        <motion.section
+          className="flex flex-col items-center gap-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h2 className="font-semibold text-[36px] md:text-[64px] leading-[1.3] text-[#282828] tracking-[-3px] max-w-[1100px]">
+            Track Your Golf Journey: Collect Every Course & Beat your Friends by Playing the Best Courses
+          </h2>
+          <p className="font-normal text-[18px] md:text-[24px] leading-[28px] text-[#282828] tracking-[-0.3125px] max-w-[919px]">
+            Join the waitlist for Golfy. Every time you play a new course you collect its XP based on its rarity. Track your progress as you play new courses and keep up with your friends as they level up.
+          </p>
+          <button
+            onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#798d40] text-white font-semibold text-[18px] px-[47px] py-[18px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
+          >
+            Join Waitlist
+          </button>
+        </motion.section>
+
+        {/* Content Sections */}
+        <div className="space-y-8">
+          {/* Collect Courses & Badges Row */}
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Collect Courses Section */}
+            <div className="bg-white border border-[#b2b2b2] rounded-xl p-6 md:p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="font-semibold text-[20px] leading-[28px] text-[#282828] tracking-[-0.3125px] mb-1">
+                  Collect Courses
+                </h3>
+                <p className="font-normal text-[16px] leading-[23px] text-[#282828] tracking-[-0.3125px]">
+                  Build your personal collection of golf courses, earn badges, and discover new places to play across the country. And share everywhere you play with your friends!
+                </p>
+              </div>
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="relative w-full max-w-[298px] h-[500px] rounded-[16px] overflow-hidden">
+                  <Image
+                    src="/addnewcourse.png"
+                    alt="New Course Collected"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative w-full max-w-[363px] h-[429px] rounded-[16px] overflow-hidden bg-white/70">
+                  <Image
+                    src="/feed.png"
+                    alt="Activity Feed"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Badges Section */}
+            <div className="bg-white border border-[#b2b2b2] rounded-xl p-6 md:p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="font-semibold text-[20px] leading-[28px] text-[#282828] tracking-[-0.3125px] mb-1">
+                  Badges
+                </h3>
+                <p className="font-normal text-[16px] leading-[23px] text-[#282828] tracking-[-0.3125px]">
+                  As you collect different courses you will start to earn badges as achievements for collecting related courses or completing challenges. Earning badges helps boost your XP making you level up faster.
+                </p>
+              </div>
+              <div className="flex gap-6 items-start justify-center">
+                <div className="relative w-[204px] h-[410px] rounded-[28px] overflow-hidden shadow-lg">
+                  <Image
+                    src="/BadgeCard.png"
+                    alt="Badge Card 1"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative w-[204px] h-[410px] rounded-[28px] overflow-hidden shadow-lg">
+                  <Image
+                    src="/BadgeCard2.png"
+                    alt="Badge Card 2"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Subcopy */}
-          <motion.p
-            className="text-center text-muted-foreground text-base mb-8 leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+          {/* Curated Courses & Leaderboard Row */}
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Join the waitlist for <span className="font-semibold text-foreground">Golfy</span>. Track the courses you play and earn XP and badges for collecting rare courses. Be the first to tee off when we launch.
-          </motion.p>
+            {/* Curated Courses Section */}
+            <div className="bg-white border border-[#b2b2b2] rounded-xl p-6 md:p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="font-semibold text-[20px] leading-[28px] text-[#282828] tracking-[-0.3125px] mb-1">
+                  Curated Courses
+                </h3>
+                <p className="font-normal text-[16px] leading-[23px] text-[#282828] tracking-[-0.3125px]">
+                  Explore curated collections from coastal gems to championship courses, earn XP for each course you play. The more rare the course the more XP you earn.
+                </p>
+              </div>
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="relative w-full max-w-[326px] h-[500px] rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/lists.png"
+                    alt="Curated Course Lists"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-col gap-6">
+                  <div className="relative w-full max-w-[439px] h-[186px] rounded-2xl overflow-hidden shadow-lg">
+                    <Image
+                      src="/rarity.png"
+                      alt="Course Rarity"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative w-full max-w-[303px] h-[281px] rounded-2xl overflow-hidden shadow-lg">
+                    <Image
+                      src="/courses.png"
+                      alt="Courses"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Success State */}
-          {isSubmitted && (
-            <motion.div
-              className="mb-6 p-4 bg-white rounded-xl flex items-center gap-3"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            >
-              <CheckCircle2 className="w-5 h-5 text-lime flex-shrink-0" />
-              <p className="text-sm text-foreground font-medium">
-                You're on the list! We'll notify you when we launch.
-              </p>
-            </motion.div>
-          )}
+            {/* Leaderboard Section */}
+            <div className="bg-white border border-[#b2b2b2] rounded-xl p-6 md:p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="font-semibold text-[20px] leading-[28px] text-[#282828] tracking-[-0.3125px] mb-1">
+                  Leaderboard
+                </h3>
+                <p className="font-normal text-[16px] leading-[23px] text-[#282828] tracking-[-0.3125px]">
+                  As you and your friends play different courses you collect XP for each new course you play. The XP helps you level up, track your progress and your friends as you compete to see who can get the highest level.
+                </p>
+              </div>
+              <div className="flex items-center justify-center flex-1">
+                <div className="relative w-full max-w-[307px] h-[402px] rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/leaderboard.png"
+                    alt="Leaderboard"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
-          {/* Form */}
-          <motion.form
-            onSubmit={handleSubmit}
-            className="space-y-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-          >
-            {/* Email Input */}
-            <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+        {/* CTA Section */}
+        <motion.section
+          id="waitlist-form"
+          className="bg-[#1a1f1b] rounded-3xl p-8 md:p-12 flex flex-col items-center gap-6 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h3 className="font-normal text-[16px] leading-[24px] text-white tracking-[-0.3125px]">
+            Ready to start your collection?
+          </h3>
+          <p className="font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.8)] tracking-[-0.3125px] max-w-[560px]">
+            Join other golfers tracking their courses and building their golf legacy
+          </p>
+
+          {/* Email Form */}
+          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 w-full max-w-[448px]">
+            <div className="relative flex-1">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full h-12 pl-12 pr-4 bg-white border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-lime focus:border-transparent transition-all"
+                className="w-full h-[58px] pl-12 pr-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#798d40] focus:border-transparent transition-all"
                 disabled={isLoading}
               />
             </div>
-
-            {/* Submit Button */}
-            <motion.button
+            <button
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 bg-lime hover:bg-lime/90 text-lime-foreground font-semibold rounded-xl transition-all shadow-lg shadow-lime/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="bg-[#798d40] text-white font-semibold text-[18px] px-[47px] py-[18px] rounded-xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 border-2 border-lime-foreground/30 border-t-lime-foreground rounded-full animate-spin" />
-                  <span>Joining...</span>
-                </div>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5" />
-                  <span>Join the Waitlist</span>
-                </>
-              )}
-            </motion.button>
-          </motion.form>
+              {isLoading ? "Joining..." : "Join Waitlist"}
+            </button>
+          </form>
 
-          {/* Footer Text */}
-          <motion.p
-            className="text-center text-xs text-muted-foreground mt-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            No spam, ever. We'll only notify you when we launch.
-          </motion.p>
-        </div>
-
-        {/* Stats Badge */}
-        <motion.div
-          className="mt-6 text-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5 }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-sm rounded-full border border-border">
-            <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">
-              Join {waitlistCount !== null && waitlistCount >= 50 ? (
-                <span className="font-semibold text-foreground">{waitlistCount} golfers</span>
-              ) : (
-                <span className="font-semibold text-foreground">golfers</span>
-              )} on the waitlist
-            </span>
-          </div>
-        </motion.div>
-      </motion.div>
+          {/* Waitlist Count */}
+          {waitlistCount !== null && waitlistCount > 0 && (
+            <motion.p
+              className="text-white/60 text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Join <span className="font-bold text-white">{waitlistCount}</span> golfers already waiting
+            </motion.p>
+          )}
+        </motion.section>
+      </div>
     </div>
   );
 }
