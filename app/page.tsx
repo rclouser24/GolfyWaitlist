@@ -104,7 +104,7 @@ export default function Home() {
       </motion.header>
 
       {/* Main Content */}
-      <div className="w-full max-w-[1280px] px-4 md:px-8 mt-16 md:mt-24 mb-24 space-y-14 md:space-y-24">
+      <div className="w-full max-w-[1280px] px-4 md:px-8 mt-16 md:mt-24 mb-24 space-y-24 md:space-y-24">
         {/* Hero Section */}
         <motion.section
           className="flex flex-col items-center gap-8 text-center"
