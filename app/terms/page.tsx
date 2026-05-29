@@ -214,12 +214,20 @@ export default function TermsPage() {
           <p className="text-[14px] text-[#6b6b6b] tracking-[-0.3125px]">
             © {new Date().getFullYear()} Golfy. All rights reserved.
           </p>
-          <Link
-            href="/"
-            className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
-          >
-            Back to Home
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/privacy"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Back to Home
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

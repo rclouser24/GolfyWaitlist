@@ -7,85 +7,90 @@ export const metadata: Metadata = {
   description: "Golfy Privacy Policy — how we collect, use, and protect your data.",
 };
 
-const sections = [
+type Section = {
+  title: string;
+  content?: string;
+  bullets?: string[];
+  subsections?: { title: string; text: string }[];
+  contact?: string;
+};
+
+const sections: Section[] = [
   {
-    title: "Information We Collect",
-    content: null,
-    subsections: [
-      {
-        title: "Account Information",
-        text: "When you create a Golfy account, we collect your name, email address, username, and profile photo. This information is used solely for authentication and displaying your profile within the app.",
-      },
-      {
-        title: "Usage Data",
-        text: "We collect data about your activity in the app, including golf courses played, check-ins, badges earned, XP, and leaderboard statistics. This data is stored securely in our backend database (Supabase) and is used to power your personal collection and the social features of the app.",
-      },
-      {
-        title: "Location",
-        text: "Golfy requests access to your precise location only to help you find and check in to nearby golf courses. We do not store your location data on our servers — it is used in the moment and never persisted.",
-      },
-      {
-        title: "Payment Information",
-        text: "Subscriptions are managed entirely through Apple's App Store using StoreKit. We do not collect, store, or have access to your payment details, credit card numbers, or billing information.",
-      },
+    title: "Introduction",
+    content:
+      'Golfy ("we", "our", "us") is operated by Ryan Clouser. This policy explains what data we collect, how we use it, and your rights.',
+  },
+  {
+    title: "Data We Collect",
+    bullets: [
+      "Account information: email address, display name, username",
+      "Golf activity: courses checked in, dates played, states visited",
+      "App usage: XP earned, level, badges unlocked, streak data",
+      "Social: friends list, leaderboard rankings, activity feed posts",
+      "Device: push notification token (if permission granted)",
+      "Subscription status: active/expired plan type (payment is handled entirely by Apple — we never see card details)",
     ],
   },
   {
-    title: "How We Use Your Information",
-    content:
-      "We use the information we collect to operate and improve the Golfy app, authenticate your account, display your profile and stats to other users, enable social features like the leaderboard and activity feed, and communicate with you about app updates or support requests.",
-    subsections: [],
-  },
-  {
-    title: "Data Storage & Security",
-    content:
-      "Your account and usage data is stored using Supabase, a secure cloud database platform. We take reasonable technical and organizational measures to protect your data from unauthorized access, loss, or misuse.",
-    subsections: [],
+    title: "How We Use Your Data",
+    bullets: [
+      "To operate your account and sync your golf collection",
+      "To calculate XP, levels, badges, and leaderboard rankings",
+      "To send push notifications (only if you grant permission)",
+      "To enforce community standards and moderation",
+    ],
   },
   {
     title: "Third-Party Services",
-    content: null,
     subsections: [
       {
         title: "Supabase",
-        text: "We use Supabase as our backend database and authentication provider. Your account and usage data is stored on Supabase infrastructure.",
+        text: "Database and authentication — data stored in US-based servers.",
       },
       {
-        title: "Apple App Store & StoreKit",
-        text: "Subscription purchases are processed through Apple's App Store. Apple's privacy policy governs any data collected during the payment process. We do not receive or store your payment details.",
+        title: "Apple StoreKit",
+        text: "Subscription billing — we receive only transaction status, no payment details.",
+      },
+      {
+        title: "Apple Push Notification Service (APNs)",
+        text: "Used to deliver push notifications to your device when permission is granted.",
       },
     ],
   },
   {
-    title: "Data We Do NOT Collect or Share",
+    title: "Data Sharing",
     content:
-      "We do not sell your personal data to third parties. We do not use your data for advertising or share it with advertising networks. We do not track your location in the background or store location history.",
-    subsections: [],
+      "We do not sell your data. We do not share your data with third parties except the services listed above required to operate the app.",
   },
   {
-    title: "Your Rights & Account Deletion",
+    title: "Data Retention",
     content:
-      "You may request deletion of your account and all associated data at any time by contacting us at the email address below. Upon request, we will permanently remove your account information and usage data from our systems.",
-    subsections: [],
+      "Your data is retained as long as your account is active. You can delete your account at any time from the app's Profile → Settings → Delete Account. Deletion removes all personal data within 30 days.",
   },
   {
     title: "Children's Privacy",
     content:
-      "Golfy is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us and we will delete it promptly.",
-    subsections: [],
+      "Golfy is not directed at children under 13. We do not knowingly collect data from children under 13.",
+  },
+  {
+    title: "Your Rights",
+    bullets: [
+      "Access the data we hold about you",
+      "Request deletion of your account and data",
+      "Opt out of push notifications at any time in iOS Settings",
+    ],
+  },
+  {
+    title: "Contact",
+    content:
+      "For privacy questions or data requests, contact:",
+    contact: "clouser24ryan@gmail.com",
   },
   {
     title: "Changes to This Policy",
     content:
-      "We may update this Privacy Policy from time to time. When we do, we will update the effective date at the top of this page. Continued use of Golfy after changes are posted constitutes your acceptance of the revised policy.",
-    subsections: [],
-  },
-  {
-    title: "Contact Us",
-    content:
-      "If you have any questions or concerns about this Privacy Policy or how your data is handled, please contact us at:",
-    subsections: [],
-    contact: "privacy@golfyapp.com",
+      'We will update the "Last Updated" date at the top of this page when changes are made. Continued use of the app after changes constitutes acceptance.',
   },
 ];
 
@@ -125,10 +130,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-[16px] text-[#6b6b6b] tracking-[-0.3125px]">
-            Effective date: March 2026
-          </p>
-          <p className="text-[16px] leading-[26px] text-[#282828] tracking-[-0.3125px] mt-4">
-            Golfy is a golf course collection and tracking app for iOS. This Privacy Policy explains what information we collect, how we use it, and your rights with respect to that data. By using Golfy, you agree to the practices described in this policy.
+            Last Updated: May 2026
           </p>
         </div>
 
@@ -141,12 +143,23 @@ export default function PrivacyPage() {
               </h2>
 
               {section.content && (
-                <p className="text-[16px] leading-[26px] text-[#282828] tracking-[-0.3125px] mb-4 last:mb-0">
+                <p className="text-[16px] leading-[26px] text-[#282828] tracking-[-0.3125px] mb-3 last:mb-0">
                   {section.content}
                 </p>
               )}
 
-              {"contact" in section && section.contact && (
+              {section.bullets && (
+                <ul className="space-y-2 mt-1">
+                  {section.bullets.map((item, j) => (
+                    <li key={j} className="flex gap-3 text-[16px] leading-[26px] text-[#282828] tracking-[-0.3125px]">
+                      <span className="mt-[9px] w-[6px] h-[6px] shrink-0 rounded-full bg-[#798d40]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {section.contact && (
                 <a
                   href={`mailto:${section.contact}`}
                   className="text-[#798d40] font-semibold hover:underline text-[16px]"
@@ -155,7 +168,7 @@ export default function PrivacyPage() {
                 </a>
               )}
 
-              {section.subsections.length > 0 && (
+              {section.subsections && section.subsections.length > 0 && (
                 <div className="space-y-4 mt-2">
                   {section.subsections.map((sub, j) => (
                     <div key={j}>
@@ -172,6 +185,16 @@ export default function PrivacyPage() {
             </div>
           ))}
         </div>
+
+        {/* Legal links */}
+        <div className="mt-12 flex gap-6">
+          <Link
+            href="/terms"
+            className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+          >
+            Terms of Use
+          </Link>
+        </div>
       </main>
 
       {/* Footer */}
@@ -180,12 +203,20 @@ export default function PrivacyPage() {
           <p className="text-[14px] text-[#6b6b6b] tracking-[-0.3125px]">
             © {new Date().getFullYear()} Golfy. All rights reserved.
           </p>
-          <Link
-            href="/"
-            className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
-          >
-            Back to Home
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/terms"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Terms of Use
+            </Link>
+            <Link
+              href="/"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Back to Home
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

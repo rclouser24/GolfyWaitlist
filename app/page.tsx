@@ -1,76 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
-import { toast } from "sonner";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-
-  // Fetch waitlist count on mount
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const response = await fetch("/api/waitlist");
-        const data = await response.json();
-        setWaitlistCount(data.count);
-      } catch (error) {
-        console.error("Error fetching waitlist count:", error);
-      }
-    };
-    fetchCount();
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!email) {
-      toast.error("Please enter your email address");
-      return;
-    }
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success("You're on the list! Check your email for updates.");
-        setEmail("");
-        // Update the waitlist count
-        if (data.count) {
-          setWaitlistCount(data.count);
-        }
-      } else {
-        toast.error(data.error || "Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      toast.error("Failed to join waitlist. Please try again.");
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="bg-[#f5f3ef] min-h-screen flex flex-col items-center">
       {/* Header */}
@@ -80,7 +14,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-4 flex items-center justify-between">
+        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-4 flex items-center">
           <div className="flex items-center gap-3">
             <div className="relative w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-xl overflow-hidden">
               <Image
@@ -94,12 +28,6 @@ export default function Home() {
               Golfy
             </h1>
           </div>
-          <button
-            onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-[#798d40] text-white font-semibold text-[14px] md:text-[16px] px-6 md:px-[32px] py-2 md:py-[12px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
-          >
-            Join Waitlist
-          </button>
         </div>
       </motion.header>
 
@@ -116,14 +44,8 @@ export default function Home() {
             Track Your Golf Journey: Collect Every Course & Beat your Friends by Playing the Best Courses
           </h2>
           <p className="font-normal text-[18px] md:text-[24px] leading-[28px] text-[#282828] tracking-[-0.3125px] max-w-[919px]">
-            Join the waitlist for Golfy. Every time you play a new course you collect its XP based on its rarity. Track your progress as you play new courses and keep up with your friends as they level up.
+            Every time you play a new course you collect its XP based on its rarity. Track your progress as you play new courses and keep up with your friends as they level up.
           </p>
-          <button
-            onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-[#798d40] text-white font-semibold text-[18px] px-[47px] py-[18px] rounded-[40px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px]"
-          >
-            Join Waitlist
-          </button>
         </motion.section>
 
         {/* Content Sections */}
@@ -244,58 +166,30 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-
-        {/* CTA Section */}
-        <motion.section
-          id="waitlist-form"
-          className="bg-[#1a1f1b] rounded-3xl p-8 md:p-12 flex flex-col items-center gap-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="font-normal text-[16px] leading-[24px] text-white tracking-[-0.3125px]">
-            Ready to start your collection?
-          </h3>
-          <p className="font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.8)] tracking-[-0.3125px] max-w-[560px]">
-            Join other golfers tracking their courses and building their golf legacy
-          </p>
-
-          {/* Email Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 w-full max-w-[448px]">
-            <div className="relative flex-1">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full h-[58px] pl-12 pr-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#798d40] focus:border-transparent transition-all"
-                disabled={isLoading}
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="bg-[#798d40] text-white font-semibold text-[18px] px-[47px] py-[18px] rounded-xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#6a7a37] transition-colors tracking-[-0.4395px] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-            >
-              {isLoading ? "Joining..." : "Join Waitlist"}
-            </button>
-          </form>
-
-          {/* Waitlist Count */}
-          {waitlistCount !== null && waitlistCount > 0 && (
-            <motion.p
-              className="text-white/60 text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Join <span className="font-bold text-white">{waitlistCount}</span> golfers already waiting
-            </motion.p>
-          )}
-        </motion.section>
       </div>
+
+      {/* Footer */}
+      <footer className="w-full border-t border-[#b2b2b2] bg-white">
+        <div className="max-w-[1496px] mx-auto px-6 md:px-[108px] py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[14px] text-[#6b6b6b] tracking-[-0.3125px]">
+            © {new Date().getFullYear()} Golfy. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/privacy"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-[14px] text-[#798d40] font-semibold hover:underline tracking-[-0.3125px]"
+            >
+              Terms of Use
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
